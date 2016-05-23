@@ -24,6 +24,7 @@ public class Node {
 	// Switch that handles activation function methods
 	void activate(String type) {
 		float z;
+		
 		for(int i = 0; i < in.size(); i++) {
 			z += in.get(i);
 		}
@@ -45,6 +46,20 @@ public class Node {
 		}
 
 		toPush *= weight;
+	}
+
+	public float calcCost(String type, float y) {
+		float c;
+
+		switch(type) {
+			case "quad": // Quadratic cost function
+				// TODO
+				break;
+
+			default: // If the String received is invalid
+				System.out.println("Error: Invalid cost function");
+				break;
+		}
 	}
 
 	void pushTo(Node n) {

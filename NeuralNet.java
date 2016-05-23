@@ -10,12 +10,17 @@
  */
 
 public class NeuralNet {
+	String actType;
+	String costType;
 	Node[] in;
 	ArrayList<Node[]> hidden;
 	Node[] out;
 	float learnRate = 0.03;
 
-	public NeuralNet(int nI, int[] nH, int nO) {
+	public NeuralNet(String actType_, String costType_, int nI, int[] nH, int nO) {
+		actType = actType_;
+		costType = costType_;
+
 		in = new Node[nI];
 
 		hidden = new ArrayList<Node[]>();
@@ -26,30 +31,34 @@ public class NeuralNet {
 		out = new Node[nO];
 	}
 
-	void calcCost(String type) {
-		switch(type) {
-			case "quad": // Quadratic cost function
-				break;
+	void calcCost(String type, float[] y) {
+		int sigma;
 
-			default: // If the String received is invalid
-				System.out.println("Error: Invalid cost function");
-				break;
+		for(int i = 0; i < hidden.size(); i++) {
+			for(int q = 0; q < hidden.get(i).length; q++) {
+				sigma += hidden.get(i[q]).calcCost(type);
+			}
 		}
 	}
 
 	// This training methods is purely for testing
 	void train(float[] x, float[] y) {
-		for(int i = i; i < x.length; i++) {
-			// TODO
+		this.push(x);
+		this.calcCost(costType, y);
 		}
 	}
 
-	// Sends inputs to input nodes based on position
-	void input(float x) {
-		// TODO
+	// Pushes inputs to input nodes based on position
+	void push(float[] x) {
+		for(int i = 0; i < x.length; i++) {
+			if(i < in.length) {
+				in[i].receive(x[i]);
+			}
+		}
 	}
 
-	void pass() {
+	// Cycles network with data stored in input nodes
+	void cycle() {
 		// TODO
 	}
 }
